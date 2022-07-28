@@ -31,26 +31,19 @@ translateByWidthOfImage();
 
 
 //   Interval to avoid overflow on clicking too fast
-
-    // nextButton.setInterval(() => {
-
+    nextButton.addEventListener('click', function(){
+        imageSlider.style.transition = "transform 200ms";
+        counter++;
+        translateByWidthOfImage();
+        });
         
-        nextButton.addEventListener('click', function(){
-            imageSlider.style.transition = "transform 200ms";
-            setTimeout(()=>{
-                counter++;
-            }, 200)
-            translateByWidthOfImage();
-            });
 
 //   Interval to avoid overflow on clicking too fast
 
     // Next Button
 prevButton.addEventListener('click', function(){
     imageSlider.style.transition = "transform 200ms";
-    setTimeout(()=>{
         counter--;
-    }, 200)
     translateByWidthOfImage();
 
 });
