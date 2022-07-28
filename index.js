@@ -1,18 +1,22 @@
-// Declarations
+// ------- Declarations
 
-
+// Selects the slider container itself, containing the images
 const imageSlider = document.querySelector('.slider-wrapper');
-const sliderImages = document.querySelectorAll('.slider-wrapper img')
 
+// Selects all images and can be used as an array.
+
+const sliderImages = document.querySelectorAll('.slider-wrapper img') 
+
+
+// Selects the previous and next buttons
 const prevButton = document.querySelector('#button-previous');
 const nextButton = document.querySelector('#button-next');
 
 
+// Counter that changes on click to make the transitions based on width later => counter(which may be equal to whatever value) multiplied by the width => resulting in a translateX to the left or right depending on the counter value;
+
 let counter = 1;
 const imgSize = sliderImages[0].clientWidth;
-
-
-
 
 
 function translateByWidthOfImage(){
@@ -21,26 +25,38 @@ function translateByWidthOfImage(){
 
 translateByWidthOfImage();
 
-// Click event listeners on the 2 buttons 
+// -------- Click event listeners on the 2 buttons 
 
       // Previous button
-nextButton.addEventListener('click', function togglePrevious(){
 
-    imageSlider.style.transition = "transform 200ms";
-    counter++;
-    translateByWidthOfImage();
-});
+
+//   Interval to avoid overflow on clicking too fast
+
+    // nextButton.setInterval(() => {
+
+        
+        nextButton.addEventListener('click', function(){
+            imageSlider.style.transition = "transform 200ms";
+            setTimeout(()=>{
+                counter++;
+            }, 200)
+            translateByWidthOfImage();
+            });
+
+//   Interval to avoid overflow on clicking too fast
 
     // Next Button
-prevButton.addEventListener('click', function toggleNext(){
+prevButton.addEventListener('click', function(){
     imageSlider.style.transition = "transform 200ms";
-    counter--;
+    setTimeout(()=>{
+        counter--;
+    }, 200)
     translateByWidthOfImage();
 
 });
 
 
-// Transition-end event listener in order to make the slider infinite on last and first children
+// ------ Transition-end event listener in order to make the slider infinite on last and first children
 
 imageSlider.addEventListener('transitionend', () => {
 
